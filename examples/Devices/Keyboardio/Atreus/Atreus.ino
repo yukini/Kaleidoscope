@@ -53,51 +53,93 @@ enum {
 #define Key_Star        LSHIFT(Key_8)
 #define Key_Plus        LSHIFT(Key_Equals)
 
+//      JIS-keyboard
+#define JIS_Key_Exclamation  LSHIFT(Key_1)
+#define JIS_Key_DoubleQuote  LSHIFT(Key_2)
+#define JIS_Key_Hash         LSHIFT(Key_3)
+#define JIS_Key_Dollar       LSHIFT(Key_4)
+#define JIS_Key_Percent      LSHIFT(Key_5)
+#define JIS_Key_And          LSHIFT(Key_6)
+#define JIS_Key_Quote        LSHIFT(Key_7)
+#define JIS_Key_RightParen   LSHIFT(Key_8)
+#define JIS_Key_LeftParen    LSHIFT(Key_9)
+#define JIS_Key_At           Key_LeftBracket    // @
+#define JIS_Key_Caret        Key_Equals         // ^
+#define JIS_Key_Semicolon    Key_Semicolon      // ;
+#define JIS_Key_Colon        Key_Quote          // :
+#define JIS_Key_Eisu         Key_Lang2          // Key_Lang2
+#define JIS_Key_Kana         Key_Lang1          // Key_Lang1
+#define JIS_Key_LeftBracket  Key_RightBracket   // [
+#define JIS_Key_RightBracket Key_NonUsPound     // ]
+#define JIS_BackSlash        Key_International1 //
+#define JIS_Key_YenMark      Key_International3 // ¥
+
+
 enum {
   QWERTY,
   FUN,
-  UPPER
+  UPPER,
+  ARROW
 };
 
 // clang-format off
 KEYMAPS(
   [QWERTY] = KEYMAP_STACKED
+  /* BASE
+   *       0       1       2       3       4       5       6       7       8       9       10      11
+   *   +---------------------------------------+               +---------------------------------------+
+   * 0 |   Q   |   W   |   E   |   R   |   T   |               |   Y   |   U   |   I   |   O   |   P   |
+   * 1 |   A   |   S   |   D   |   F   |   G   +---------------+   H   |   J   |   K   |   L   |   :   |
+   * 2 |   Z   |   X   |   C   |   V   |   B   |  TAB  |   -   |   N   |   M   |   ,   |   .   |   /   |
+   * 3 |  SFT  |  TAB  |  ALT  |  CMD  |   BS  | E/SFT | J/CTL |  SPC  |  FUN  |   _   |   ;   |  ENT  |
+   *   +-----------------------------------------------------------------------------------------------+
+   */
   (
-       Key_Q   ,Key_W   ,Key_E       ,Key_R         ,Key_T
-      ,Key_A   ,Key_S   ,Key_D       ,Key_F         ,Key_G
-      ,Key_Z   ,Key_X   ,Key_C       ,Key_V         ,Key_B, Key_Backtick
-      ,Key_Esc ,Key_Tab ,Key_LeftGui ,Key_LeftShift ,Key_Backspace ,Key_LeftControl
+       Key_Q            ,Key_W      ,Key_E        ,Key_R         ,Key_T
+      ,Key_A            ,Key_S      ,Key_D        ,Key_F         ,Key_G
+      ,Key_Z            ,Key_X      ,Key_C        ,Key_V         ,Key_B               ,Key_Tab
+      ,Key_LeftShift    ,Key_Esc    ,Key_LeftAlt  ,Key_LeftGui   ,Key_Backspace       ,Key_LeftShift
 
-                     ,Key_Y     ,Key_U      ,Key_I     ,Key_O      ,Key_P
-                     ,Key_H     ,Key_J      ,Key_K     ,Key_L      ,Key_Semicolon
-       ,Key_Backslash,Key_N     ,Key_M      ,Key_Comma ,Key_Period ,Key_Slash
-       ,Key_LeftAlt  ,Key_Space ,MO(FUN)    ,Key_Minus ,Key_Quote  ,Key_Enter
+                        ,Key_Y      ,Key_U        ,Key_I         ,Key_O               ,Key_P
+                        ,Key_H      ,Key_J        ,Key_K         ,Key_L               ,JIS_Key_Colon
+      ,Key_Minus        ,Key_N      ,Key_M        ,Key_Comma     ,Key_Period          ,Key_Slash
+      ,Key_RightControl ,Key_Space  ,MO(FUN)      ,JIS_BackSlash ,JIS_Key_Semicolon   ,Key_Enter
   ),
-
   [FUN] = KEYMAP_STACKED
   (
-       Key_Exclamation ,Key_At           ,Key_UpArrow   ,Key_Dollar           ,Key_Percent
-      ,Key_LeftParen   ,Key_LeftArrow    ,Key_DownArrow ,Key_RightArrow       ,Key_RightParen
-      ,Key_LeftBracket ,Key_RightBracket ,Key_Hash      ,Key_LeftCurlyBracket ,Key_RightCurlyBracket ,Key_Caret
-      ,TG(UPPER)       ,Key_Insert       ,Key_LeftGui   ,Key_LeftShift        ,Key_Delete         ,Key_LeftControl
-
-                   ,Key_PageUp   ,Key_7 ,Key_8      ,Key_9 ,Key_Backspace
-                   ,Key_PageDown ,Key_4 ,Key_5      ,Key_6 ,___
-      ,Key_And     ,Key_Star     ,Key_1 ,Key_2      ,Key_3 ,Key_Plus
-      ,Key_LeftAlt ,Key_Space    ,___   ,Key_Period ,Key_0 ,Key_Equals
-   ),
-
+       Key_1 ,Key_2 ,Key_3 ,Key_4 ,Key_5
+      ,___      ,___           ,___           ,___           ,___
+      ,Key_1    ,Key_2         ,Key_3         ,Key_4         ,Key_5          ,Key_Tab
+      ,Key_LeftShift ,Key_Esc ,Key_LeftAlt ,Key_LeftGui   ,Key_Backspace ,Key_LeftShift
+  
+                         ,Key_6 ,Key_7 ,Key_8 ,Key_9  ,Key_0
+                         ,___           ,___           ,___           ,JIS_Key_At           ,JIS_Key_LeftBracket
+       ,Key_Enter        ,Key_6         ,Key_7         ,Key_8         ,___          ,JIS_Key_RightBracket
+       ,Key_RightControl ,Key_Space     ,___           ,Key_Period    ,___            ,___
+  ),
   [UPPER] = KEYMAP_STACKED
   (
-       Key_Insert            ,Key_Home                 ,Key_UpArrow   ,Key_End        ,Key_PageUp
-      ,Key_Delete            ,Key_LeftArrow            ,Key_DownArrow ,Key_RightArrow ,Key_PageDown
-      ,M(MACRO_VERSION_INFO) ,Consumer_VolumeIncrement ,XXX           ,XXX            ,___ ,___
-      ,MoveToLayer(QWERTY)   ,Consumer_VolumeDecrement ,___           ,___            ,___ ,___
+       Key_Insert            ,Key_Home                 ,Key_UpArrow                         ,Key_End        ,Key_PageUp
+      ,Key_Delete            ,Key_LeftArrow            ,Key_DownArrow                       ,Key_RightArrow ,Key_PageDown
+      ,M(MACRO_VERSION_INFO) ,Consumer_VolumeIncrement ,Consumer_DisplayBrightnessIncrement ,XXX            ,___ ,___
+      ,MoveToLayer(QWERTY)   ,Consumer_VolumeDecrement ,Consumer_DisplayBrightnessDecrement ,___            ,___ ,___
 
                 ,Key_UpArrow   ,Key_F7              ,Key_F8          ,Key_F9         ,Key_F10
                 ,Key_DownArrow ,Key_F4              ,Key_F5          ,Key_F6         ,Key_F11
       ,___      ,XXX           ,Key_F1              ,Key_F2          ,Key_F3         ,Key_F12
       ,___      ,___           ,MoveToLayer(QWERTY) ,Key_PrintScreen ,Key_ScrollLock ,Consumer_PlaySlashPause
+   ),
+  [ARROW] = KEYMAP_STACKED
+  (
+       ___ ,___ ,___ ,___ ,___
+      ,___ ,___ ,___ ,___ ,___
+      ,___ ,___ ,___ ,___ ,___ ,___
+      ,___ ,___ ,___ ,___ ,___ ,___
+
+           ,Key_PageUp    ,Key_PageDown  ,___         ,___            ,___
+           ,Key_LeftArrow ,Key_DownArrow ,Key_UpArrow ,Key_RightArrow ,___
+      ,___ ,___           ,___           ,___         ,___            ,___
+      ,___ ,___           ,___           ,___         ,___            ,___
    )
 )
 // clang-format on
@@ -203,6 +245,14 @@ void setup() {
   LayerNames.reserve_storage(63);
 
   Layer.move(EEPROMSettings.default_layer());
+
+  QUKEYS(
+      kaleidoscope::plugin::Qukey(0, KeyAddr(3, 5),  Key_Lang2),
+      kaleidoscope::plugin::Qukey(0, KeyAddr(3, 6),  Key_Lang1),
+      kaleidoscope::plugin::Qukey(0, KeyAddr(1, 11), MO(ARROW)) //
+      // kaleidoscope::plugin::Qukey(0, KeyAddr(3, 0),  Key_LeftShift),  // 
+      // kaleidoscope::plugin::Qukey(1, KeyAddr(3, 0),  Key_LeftShift)  // 
+      );
 
   // To avoid any surprises, SpaceCadet is turned off by default. However, it
   // can be permanently enabled via Chrysalis, so we should only disable it if
