@@ -78,6 +78,7 @@ enum {
 enum {
   QWERTY,
   FUN,
+  FUN2,
   UPPER,
   ARROW
 };
@@ -95,27 +96,41 @@ KEYMAPS(
    *   +-----------------------------------------------------------------------------------------------+
    */
   (
+
        Key_Q            ,Key_W      ,Key_E        ,Key_R         ,Key_T
       ,Key_A            ,Key_S      ,Key_D        ,Key_F         ,Key_G
       ,Key_Z            ,Key_X      ,Key_C        ,Key_V         ,Key_B               ,Key_Tab
-      ,Key_LeftShift    ,Key_Esc    ,Key_LeftAlt  ,Key_LeftGui   ,Key_Backspace       ,Key_LeftShift
+      ,Key_Esc          ,Key_Tab    ,Key_LeftAlt  ,Key_LeftGui   ,Key_Backspace       ,Key_LeftControl
 
                         ,Key_Y      ,Key_U        ,Key_I         ,Key_O               ,Key_P
                         ,Key_H      ,Key_J        ,Key_K         ,Key_L               ,JIS_Key_Colon
-      ,Key_Minus        ,Key_N      ,Key_M        ,Key_Comma     ,Key_Period          ,Key_Slash
-      ,Key_RightControl ,Key_Space  ,MO(FUN)      ,JIS_BackSlash ,JIS_Key_Semicolon   ,Key_Enter
+      ,JIS_BackSlash    ,Key_N      ,Key_M        ,Key_Comma     ,Key_Period          ,Key_Slash
+      ,Key_RightShift   ,Key_Space  ,MO(FUN)      ,Key_Minus     ,JIS_Key_Semicolon   ,Key_Enter
   ),
   [FUN] = KEYMAP_STACKED
   (
        Key_1 ,Key_2 ,Key_3 ,Key_4 ,Key_5
-      ,___      ,___           ,___           ,___           ,___
-      ,Key_1    ,Key_2         ,Key_3         ,Key_4         ,Key_5          ,Key_Tab
-      ,Key_LeftShift ,Key_Esc ,Key_LeftAlt ,Key_LeftGui   ,Key_Backspace ,Key_LeftShift
+      ,___    ,___         ,___         ,___         ,___
+      ,___    ,___         ,___         ,___         ,___        ,Key_Tab
+      ,Key_Esc          ,Key_Esc    ,Key_LeftAlt  ,Key_LeftGui   ,Key_Backspace       ,Key_LeftControl
   
-                         ,Key_6 ,Key_7 ,Key_8 ,Key_9  ,Key_0
-                         ,___           ,___           ,___           ,JIS_Key_At           ,JIS_Key_LeftBracket
-       ,Key_Enter        ,Key_6         ,Key_7         ,Key_8         ,___          ,JIS_Key_RightBracket
-       ,Key_RightControl ,Key_Space     ,___           ,Key_Period    ,___            ,___
+                        ,Key_6      ,Key_7    ,Key_8       ,Key_9               ,Key_0
+                        ,___        ,___      ,___         ,JIS_Key_At          ,JIS_Key_LeftBracket
+      ,JIS_BackSlash    ,___        ,___      ,___         ,___                 ,JIS_Key_RightBracket
+      ,Key_RightShift   ,Key_Space  ,___      ,Key_Minus   ,JIS_Key_Semicolon   ,Key_Enter
+  ),
+  [FUN2] = KEYMAP_STACKED
+  (
+
+       Key_F1  ,Key_F2  ,Key_F3      ,Key_F4      ,Key_F5
+      ,Key_F6  ,Key_F7  ,Key_F8      ,Key_F9      ,Key_F10
+      ,Key_F11 ,Key_F12 ,___         ,___         ,___           ,Key_Tab
+      ,Key_Esc ,Key_Esc ,Key_LeftAlt ,Key_LeftGui ,Key_Backspace ,Key_LeftControl
+  
+                        ,___      ,___    ,___       ,___               ,___
+                        ,___        ,___      ,___         ,JIS_Key_At          ,JIS_Key_LeftBracket
+      ,JIS_BackSlash    ,___        ,___      ,___         ,___                 ,JIS_Key_RightBracket
+      ,Key_RightShift   ,Key_Space  ,___      ,Key_Minus   ,JIS_Key_Semicolon   ,Key_Enter
   ),
   [UPPER] = KEYMAP_STACKED
   (
@@ -131,15 +146,15 @@ KEYMAPS(
    ),
   [ARROW] = KEYMAP_STACKED
   (
-       ___ ,___ ,___ ,___ ,___
-      ,___ ,___ ,___ ,___ ,___
-      ,___ ,___ ,___ ,___ ,___ ,___
-      ,___ ,___ ,___ ,___ ,___ ,___
+       Key_Esc  ,___            ,___            ,___          ,___
+      ,___      ,___            ,___            ,___          ,___
+      ,___      ,___            ,___            ,___          ,___            ,___
+      ,___      ,___            ,___            ,___          ,___            ,___
 
-           ,Key_PageUp    ,Key_PageDown  ,___         ,___            ,___
-           ,Key_LeftArrow ,Key_DownArrow ,Key_UpArrow ,Key_RightArrow ,___
-      ,___ ,___           ,___           ,___         ,___            ,___
-      ,___ ,___           ,___           ,___         ,___            ,___
+                ,Key_PageUp     ,Key_PageDown   ,___          ,___            ,___
+                ,Key_LeftArrow  ,Key_DownArrow  ,Key_UpArrow  ,Key_RightArrow ,___
+      ,___      ,___            ,___            ,___          ,___            ,___
+      ,___      ,___            ,___            ,___          ,___            ,___
    )
 )
 // clang-format on
@@ -249,9 +264,7 @@ void setup() {
   QUKEYS(
       kaleidoscope::plugin::Qukey(0, KeyAddr(3, 5),  Key_Lang2),
       kaleidoscope::plugin::Qukey(0, KeyAddr(3, 6),  Key_Lang1),
-      kaleidoscope::plugin::Qukey(0, KeyAddr(1, 11), MO(ARROW)) //
-      // kaleidoscope::plugin::Qukey(0, KeyAddr(3, 0),  Key_LeftShift),  // 
-      // kaleidoscope::plugin::Qukey(1, KeyAddr(3, 0),  Key_LeftShift)  // 
+      kaleidoscope::plugin::Qukey(0, KeyAddr(1, 11), MO(ARROW))
       );
 
   // To avoid any surprises, SpaceCadet is turned off by default. However, it
