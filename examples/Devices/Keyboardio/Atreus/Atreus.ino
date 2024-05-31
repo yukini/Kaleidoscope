@@ -39,7 +39,7 @@
 #define TG(n) LockLayer(n)
 
 enum {
-  MACRO_QWERTY,
+  MACRO_BASE,
   MACRO_VERSION_INFO
 };
 
@@ -76,7 +76,7 @@ enum {
 
 
 enum {
-  QWERTY,
+  BASE,
   FUN,
   FUN2,
   UPPER,
@@ -85,7 +85,7 @@ enum {
 
 // clang-format off
 KEYMAPS(
-  [QWERTY] = KEYMAP_STACKED
+  [BASE] = KEYMAP_STACKED
   /* BASE
    *       0       1       2       3       4       5       6       7       8       9       10      11
    *   +---------------------------------------+               +---------------------------------------+
@@ -95,54 +95,61 @@ KEYMAPS(
    * 3 |  SFT  |  TAB  |  ALT  |  CMD  |   BS  | E/SFT | J/CTL |  SPC  |  FUN  |   _   |   ;   |  ENT  |
    *   +-----------------------------------------------------------------------------------------------+
    */
+  /* BASE
+   *       0       1       2       3       4       5       6       7       8       9       10      11
+   *   +---------------------------------------+               +---------------------------------------+
+   * 0 |   Q   |   W   |   E   |   R   |   T   |               |   Y   |   U   |   I   |   O   |   P   |
+   * 1 |   A   |   S   |   D   |   F   |   G   +---------------+   H   |   J   |   K   |   L   |   :   |
+   * 2 |   Z   |   X   |   C   |   V   |   B   |  TAB  |  RET  |   N   |   M   |   ,   |   .   |   /   |
+   * 3 |  ESC  |   ~   |  BS   |  ALT  |  CTL  | E/CMD | J/SFT |  SPC  |  FUN  |   -   |   "   |   \   |
+   *   +-----------------------------------------------------------------------------------------------+
+   */
   (
+       Key_Q           ,Key_W         ,Key_E        ,Key_R            ,Key_T
+      ,Key_A           ,Key_S         ,Key_D        ,Key_F            ,Key_G
+      ,Key_Z           ,Key_X         ,Key_C        ,Key_V            ,Key_B            ,Key_Tab
+      ,Key_Esc         ,Key_Backtick  ,Key_Backspace,Key_LeftAlt      ,Key_LeftControl  ,Key_LeftShift
 
-       Key_Q            ,Key_W      ,Key_E        ,Key_R         ,Key_T
-      ,Key_A            ,Key_S      ,Key_D        ,Key_F         ,Key_G
-      ,Key_Z            ,Key_X      ,Key_C        ,Key_V         ,Key_B               ,Key_Tab
-      ,Key_Esc          ,Key_Tab    ,Key_LeftAlt  ,Key_LeftGui   ,Key_Backspace       ,Key_LeftControl
-
-                        ,Key_Y      ,Key_U        ,Key_I         ,Key_O               ,Key_P
-                        ,Key_H      ,Key_J        ,Key_K         ,Key_L               ,JIS_Key_Colon
-      ,JIS_BackSlash    ,Key_N      ,Key_M        ,Key_Comma     ,Key_Period          ,Key_Slash
-      ,Key_RightShift   ,Key_Space  ,MO(FUN)      ,Key_Minus     ,JIS_Key_Semicolon   ,Key_Enter
+                       ,Key_Y         ,Key_U        ,Key_I            ,Key_O            ,Key_P
+                       ,Key_H         ,Key_J        ,Key_K            ,Key_L            ,Key_Semicolon
+      ,Key_Enter       ,Key_N         ,Key_M        ,Key_Comma        ,Key_Period       ,Key_Slash
+      ,MO(FUN)         ,Key_Space     ,Key_LeftGui  ,Key_Minus        ,Key_Quote        ,Key_Backslash
   ),
   [FUN] = KEYMAP_STACKED
   (
-       Key_1 ,Key_2 ,Key_3 ,Key_4 ,Key_5
-      ,___    ,___         ,___         ,___         ,___
-      ,___    ,___         ,___         ,___         ,___        ,Key_Tab
-      ,Key_Esc          ,Key_Esc    ,Key_LeftAlt  ,Key_LeftGui   ,Key_Backspace       ,Key_LeftControl
+       Key_1           ,Key_2         ,Key_3        ,Key_4            ,Key_5
+      ,___             ,___           ,___          ,___              ,___
+      ,___             ,___           ,___          ,___              ,___              ,Key_Tab
+      ,Key_Esc         ,Key_Backtick  ,Key_Backspace,Key_LeftAlt      ,Key_LeftControl  ,Key_LeftShift
   
-                        ,Key_6      ,Key_7    ,Key_8       ,Key_9               ,Key_0
-                        ,___        ,___      ,___         ,JIS_Key_At          ,JIS_Key_LeftBracket
-      ,JIS_BackSlash    ,___        ,___      ,___         ,___                 ,JIS_Key_RightBracket
-      ,Key_RightShift   ,Key_Space  ,___      ,Key_Minus   ,JIS_Key_Semicolon   ,Key_Enter
+                       ,Key_6         ,Key_7        ,Key_8            ,Key_9            ,Key_0
+                       ,___           ,___          ,___              ,___              ,Key_Semicolon
+      ,Key_Enter       ,___           ,___          ,Key_Comma        ,Key_Period       ,Key_Slash
+      ,Key_RightShift  ,Key_Space     ,___          ,Key_Minus        ,Key_Quote        ,Key_Backslash
   ),
   [FUN2] = KEYMAP_STACKED
   (
-
-       Key_F1  ,Key_F2  ,Key_F3      ,Key_F4      ,Key_F5
-      ,Key_F6  ,Key_F7  ,Key_F8      ,Key_F9      ,Key_F10
-      ,Key_F11 ,Key_F12 ,___         ,___         ,___           ,Key_Tab
-      ,Key_Esc ,Key_Esc ,Key_LeftAlt ,Key_LeftGui ,Key_Backspace ,Key_LeftControl
+       Key_F1           ,Key_F2       ,Key_F3       ,Key_F4           ,Key_F5
+      ,Key_F6           ,Key_F7       ,Key_F8       ,Key_F9           ,Key_F10
+      ,Key_F11          ,Key_F12      ,___          ,___              ,___              ,Key_Tab
+      ,Key_Esc          ,Key_Backtick  ,Key_Backspace,Key_LeftAlt     ,Key_LeftControl  ,Key_LeftShift
   
-                        ,___      ,___    ,___       ,___               ,___
-                        ,___        ,___      ,___         ,JIS_Key_At          ,JIS_Key_LeftBracket
-      ,JIS_BackSlash    ,___        ,___      ,___         ,___                 ,JIS_Key_RightBracket
-      ,Key_RightShift   ,Key_Space  ,___      ,Key_Minus   ,JIS_Key_Semicolon   ,Key_Enter
+                        ,___          ,___          ,___              ,___              ,___
+                        ,___          ,___          ,___              ,JIS_Key_At       ,Key_LeftBracket
+      ,JIS_BackSlash    ,___          ,___          ,___              ,___              ,Key_RightBracket
+      ,Key_RightShift   ,Key_Space    ,___         ,Key_Minus        ,Key_Quote         ,Key_Backslash
   ),
   [UPPER] = KEYMAP_STACKED
   (
        Key_Insert            ,Key_Home                 ,Key_UpArrow                         ,Key_End        ,Key_PageUp
       ,Key_Delete            ,Key_LeftArrow            ,Key_DownArrow                       ,Key_RightArrow ,Key_PageDown
       ,M(MACRO_VERSION_INFO) ,Consumer_VolumeIncrement ,Consumer_DisplayBrightnessIncrement ,XXX            ,___ ,___
-      ,MoveToLayer(QWERTY)   ,Consumer_VolumeDecrement ,Consumer_DisplayBrightnessDecrement ,___            ,___ ,___
+      ,MoveToLayer(BASE)   ,Consumer_VolumeDecrement ,Consumer_DisplayBrightnessDecrement ,___            ,___ ,___
 
                 ,Key_UpArrow   ,Key_F7              ,Key_F8          ,Key_F9         ,Key_F10
                 ,Key_DownArrow ,Key_F4              ,Key_F5          ,Key_F6         ,Key_F11
       ,___      ,XXX           ,Key_F1              ,Key_F2          ,Key_F3         ,Key_F12
-      ,___      ,___           ,MoveToLayer(QWERTY) ,Key_PrintScreen ,Key_ScrollLock ,Consumer_PlaySlashPause
+      ,___      ,___           ,MoveToLayer(BASE) ,Key_PrintScreen ,Key_ScrollLock ,Consumer_PlaySlashPause
    ),
   [ARROW] = KEYMAP_STACKED
   (
@@ -233,12 +240,12 @@ KALEIDOSCOPE_INIT_PLUGINS(
 const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
   if (keyToggledOn(event.state)) {
     switch (macro_id) {
-    case MACRO_QWERTY:
+    case MACRO_BASE:
       // This macro is currently unused, but is kept around for compatibility
-      // reasons. We used to use it in place of `MoveToLayer(QWERTY)`, but no
+      // reasons. We used to use it in place of `MoveToLayer(BASE)`, but no
       // longer do. We keep it so that if someone still has the old layout with
       // the macro in EEPROM, it will keep working after a firmware update.
-      Layer.move(QWERTY);
+      Layer.move(BASE);
       break;
     case MACRO_VERSION_INFO:
       Macros.type(PSTR("Keyboardio Atreus - Kaleidoscope "));
@@ -264,7 +271,7 @@ void setup() {
   QUKEYS(
       kaleidoscope::plugin::Qukey(0, KeyAddr(3, 5),  Key_Lang2),
       kaleidoscope::plugin::Qukey(0, KeyAddr(3, 6),  Key_Lang1),
-      kaleidoscope::plugin::Qukey(0, KeyAddr(1, 11), MO(ARROW))
+      kaleidoscope::plugin::Qukey(0, KeyAddr(2, 11), MO(ARROW))
       );
 
   // To avoid any surprises, SpaceCadet is turned off by default. However, it
