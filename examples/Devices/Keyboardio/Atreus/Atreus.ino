@@ -78,7 +78,6 @@ enum {
 enum {
   BASE,
   FUN,
-  FUN2,
   UPPER,
   ARROW
 };
@@ -91,65 +90,44 @@ KEYMAPS(
    *   +---------------------------------------+               +---------------------------------------+
    * 0 |   Q   |   W   |   E   |   R   |   T   |               |   Y   |   U   |   I   |   O   |   P   |
    * 1 |   A   |   S   |   D   |   F   |   G   +---------------+   H   |   J   |   K   |   L   |   :   |
-   * 2 |   Z   |   X   |   C   |   V   |   B   |  TAB  |   -   |   N   |   M   |   ,   |   .   |   /   |
-   * 3 |  SFT  |  TAB  |  ALT  |  CMD  |   BS  | E/SFT | J/CTL |  SPC  |  FUN  |   _   |   ;   |  ENT  |
-   *   +-----------------------------------------------------------------------------------------------+
-   */
-  /* BASE
-   *       0       1       2       3       4       5       6       7       8       9       10      11
-   *   +---------------------------------------+               +---------------------------------------+
-   * 0 |   Q   |   W   |   E   |   R   |   T   |               |   Y   |   U   |   I   |   O   |   P   |
-   * 1 |   A   |   S   |   D   |   F   |   G   +---------------+   H   |   J   |   K   |   L   |   :   |
    * 2 |   Z   |   X   |   C   |   V   |   B   |  TAB  |  RET  |   N   |   M   |   ,   |   .   |   /   |
    * 3 |  ESC  |   ~   |  BS   |  ALT  |  CTL  | E/CMD | J/SFT |  SPC  |  FUN  |   -   |   "   |   \   |
    *   +-----------------------------------------------------------------------------------------------+
    */
   (
-       Key_Q           ,Key_W         ,Key_E        ,Key_R            ,Key_T
-      ,Key_A           ,Key_S         ,Key_D        ,Key_F            ,Key_G
-      ,Key_Z           ,Key_X         ,Key_C        ,Key_V            ,Key_B            ,Key_Tab
-      ,Key_Esc         ,Key_Backtick  ,Key_Backspace,Key_LeftAlt      ,Key_LeftControl  ,Key_LeftShift
+       Key_Q           ,Key_W            ,Key_E         ,Key_R                ,Key_T
+      ,Key_A           ,Key_S            ,Key_D         ,Key_F                ,Key_G
+      ,Key_Z           ,Key_X            ,Key_C         ,Key_V                ,Key_B            ,Key_Tab
+      ,Key_Esc         ,Key_Backtick     ,Key_Backspace ,Key_LeftAlt          ,Key_LeftShift    ,Key_LeftControl  
 
-                       ,Key_Y         ,Key_U        ,Key_I            ,Key_O            ,Key_P
-                       ,Key_H         ,Key_J        ,Key_K            ,Key_L            ,Key_Semicolon
-      ,Key_Enter       ,Key_N         ,Key_M        ,Key_Comma        ,Key_Period       ,Key_Slash
-      ,MO(FUN)         ,Key_Space     ,Key_LeftGui  ,Key_Minus        ,Key_Quote        ,Key_Backslash
+                       ,Key_Y            ,Key_U         ,Key_I                ,Key_O            ,Key_P
+                       ,Key_H            ,Key_J         ,Key_K                ,Key_L            ,Key_Semicolon
+      ,Key_Enter       ,Key_N            ,Key_M         ,Key_Comma            ,Key_Period       ,Key_Slash
+      ,MO(FUN)         ,Key_Space        ,Key_LeftGui   ,Key_Minus            ,Key_Quote        ,Key_Backslash
   ),
   [FUN] = KEYMAP_STACKED
   (
-       Key_1           ,Key_2         ,Key_3        ,Key_4            ,Key_5
-      ,___             ,___           ,___          ,___              ,___
-      ,___             ,___           ,___          ,___              ,___              ,Key_Tab
-      ,Key_Esc         ,Key_Backtick  ,Key_Backspace,Key_LeftAlt      ,Key_LeftControl  ,Key_LeftShift
-  
-                       ,Key_6         ,Key_7        ,Key_8            ,Key_9            ,Key_0
-                       ,___           ,___          ,___              ,___              ,Key_Semicolon
-      ,Key_Enter       ,___           ,___          ,Key_Comma        ,Key_Period       ,Key_Slash
-      ,Key_RightShift  ,Key_Space     ,___          ,Key_Minus        ,Key_Quote        ,Key_Backslash
-  ),
-  [FUN2] = KEYMAP_STACKED
-  (
-       Key_F1           ,Key_F2       ,Key_F3       ,Key_F4           ,Key_F5
-      ,Key_F6           ,Key_F7       ,Key_F8       ,Key_F9           ,Key_F10
-      ,Key_F11          ,Key_F12      ,___          ,___              ,___              ,Key_Tab
-      ,Key_Esc          ,Key_Backtick  ,Key_Backspace,Key_LeftAlt     ,Key_LeftControl  ,Key_LeftShift
-  
-                        ,___          ,___          ,___              ,___              ,___
-                        ,___          ,___          ,___              ,JIS_Key_At       ,Key_LeftBracket
-      ,JIS_BackSlash    ,___          ,___          ,___              ,___              ,Key_RightBracket
-      ,Key_RightShift   ,Key_Space    ,___         ,Key_Minus        ,Key_Quote         ,Key_Backslash
-  ),
+       Key_Exclamation ,Key_At           ,Key_UpArrow   ,Key_Dollar           ,Key_Percent
+      ,Key_LeftParen   ,Key_LeftArrow    ,Key_DownArrow ,Key_RightArrow       ,Key_RightParen
+      ,Key_LeftBracket ,Key_RightBracket ,Key_Hash      ,Key_LeftCurlyBracket ,Key_RightCurlyBracket ,Key_Caret
+      ,TG(UPPER)       ,Key_Insert       ,Key_Delete    ,Key_LeftAlt          ,Key_LeftShift         ,Key_LeftControl
+
+                       ,Key_PageUp       ,Key_7         ,Key_8                ,Key_9                 ,Key_Backspace
+                       ,Key_PageDown     ,Key_4         ,Key_5                ,Key_6                 ,___
+      ,Key_And         ,Key_Star         ,Key_1         ,Key_2                ,Key_3                 ,Key_Plus
+      ,___             ,Key_Space        ,Key_LeftGui   ,Key_Period           ,Key_0                 ,Key_Equals
+   ),
   [UPPER] = KEYMAP_STACKED
   (
-       Key_Insert            ,Key_Home                 ,Key_UpArrow                         ,Key_End        ,Key_PageUp
-      ,Key_Delete            ,Key_LeftArrow            ,Key_DownArrow                       ,Key_RightArrow ,Key_PageDown
-      ,M(MACRO_VERSION_INFO) ,Consumer_VolumeIncrement ,Consumer_DisplayBrightnessIncrement ,XXX            ,___ ,___
-      ,MoveToLayer(BASE)   ,Consumer_VolumeDecrement ,Consumer_DisplayBrightnessDecrement ,___            ,___ ,___
+       Key_Insert        ,Key_Home                 ,Key_UpArrow                         ,Key_End         ,Key_PageUp
+      ,Key_Delete        ,Key_LeftArrow            ,Key_DownArrow                       ,Key_RightArrow  ,Key_PageDown
+      ,___               ,Consumer_VolumeIncrement ,Consumer_DisplayBrightnessIncrement ,XXX             ,___            ,___
+      ,MoveToLayer(BASE) ,Consumer_VolumeDecrement ,Consumer_DisplayBrightnessDecrement ,___             ,___            ,___
 
-                ,Key_UpArrow   ,Key_F7              ,Key_F8          ,Key_F9         ,Key_F10
-                ,Key_DownArrow ,Key_F4              ,Key_F5          ,Key_F6         ,Key_F11
-      ,___      ,XXX           ,Key_F1              ,Key_F2          ,Key_F3         ,Key_F12
-      ,___      ,___           ,MoveToLayer(BASE) ,Key_PrintScreen ,Key_ScrollLock ,Consumer_PlaySlashPause
+                         ,Key_UpArrow              ,Key_F7                              ,Key_F8          ,Key_F9         ,Key_F10
+                         ,Key_DownArrow            ,Key_F4                              ,Key_F5          ,Key_F6         ,Key_F11
+      ,___               ,XXX                      ,Key_F1                              ,Key_F2          ,Key_F3         ,Key_F12
+      ,MoveToLayer(BASE) ,___                      ,MoveToLayer(BASE)                   ,Key_PrintScreen ,Key_ScrollLock ,Consumer_PlaySlashPause
    ),
   [ARROW] = KEYMAP_STACKED
   (
